@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timekeeper</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app">
+        <h1>Timekeeper</h1>
+
+        <!-- Login Section -->
+        <div id="login-section">
+            <h2>Login</h2>
+            <div class="form-row">
+                <label for="login-username">Username</label>
+                <input type="text" id="login-username" autocomplete="username">
+            </div>
+            <div class="form-row">
+                <label for="login-password">Password</label>
+                <input type="password" id="login-password" autocomplete="current-password">
+            </div>
+            <div class="form-row">
+                <label for="login-role">Role</label>
+                <select id="login-role">
+                    <option value="employee">Employee</option>
+                    <option value="admin">Administrator</option>
+                </select>
+            </div>
+            <button id="login-button">Login</button>
+            <p id="login-error" class="error"></p>
+        </div>
+
+        <!-- Employee Section -->
+        <div id="employee-section" class="hidden">
+            <h2>Employee Dashboard</h2>
+            <p id="employee-welcome" class="subtitle"></p>
+            <div id="shift-info" class="info"></div>
+            <div class="button-row">
+                <button id="punch-in-button" class="primary">Punch In</button>
+                <button id="punch-out-button" class="hidden primary">Punch Out</button>
+            </div>
+            <p id="punch-message"></p>
+            <div class="button-row">
+                <button id="view-history-button" class="secondary">View History</button>
+                <button id="employee-logout-button" class="secondary">Logout</button>
+            </div>
+            <div id="history-section" class="hidden">
+                <h3>Your History</h3>
+                <table id="history-table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Punch In</th>
+                            <th>Punch Out</th>
+                            <th>Hours Worked</th>
+                            <th>Pay Period Start</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Administrator Section -->
+        <div id="admin-section" class="hidden">
+            <h2>Administrator Dashboard</h2>
+            <div class="button-row">
+                <button id="admin-logout-button" class="secondary">Logout</button>
+            </div>
+            <h3>Employee Management</h3>
+            <div id="add-employee-form" class="card">
+                <h4>Add Employee</h4>
+                <div class="form-row">
+                    <label for="new-emp-username">Username</label>
+                    <input type="text" id="new-emp-username">
+                </div>
+                <div class="form-row">
+                    <label for="new-emp-password">Password</label>
+                    <input type="password" id="new-emp-password">
+                </div>
+                <div class="form-row">
+                    <label for="new-emp-rate">Hourly Rate ($/hr)</label>
+                    <input type="number" id="new-emp-rate" min="0" step="0.01">
+                </div>
+                <div class="form-row">
+                    <label for="new-emp-shift-start">Shift Start (HH:MM)</label>
+                    <!-- Use a text input for time values to simplify data entry on static pages -->
+                    <input type="text" id="new-emp-shift-start" placeholder="09:00">
+                </div>
+                <div class="form-row">
+                    <label for="new-emp-shift-end">Shift End (HH:MM)</label>
+                    <input type="text" id="new-emp-shift-end" placeholder="17:00">
+                </div>
+                <button id="add-employee-button" class="primary">Add Employee</button>
+                <p id="add-employee-error" class="error"></p>
+            </div>
+            <div class="card">
+                <h4>Existing Employees</h4>
+                <table id="employees-table">
+                    <thead>
+                        <tr>
+                            <th>Username</th>
+                            <th>Hourly Rate ($)</th>
+                            <th>Shift Start</th>
+                            <th>Shift End</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+            <div class="card">
+                <h4>Pay Period Settings</h4>
+                <p>Enter pay period start days (comma-separated, e.g., "1,15"):</p>
+                <input type="text" id="pay-period-days" placeholder="1,15">
+                <button id="save-pay-period" class="primary">Save Settings</button>
+                <p id="pay-period-message"></p>
+            </div>
+            <div class="card">
+                <h4>Summaries</h4>
+                <button id="generate-summary-button" class="primary">Generate Summary</button>
+                <table id="summary-table" class="hidden">
+                    <thead>
+                        <tr>
+                            <th>Pay Period Start</th>
+                            <th>Employee</th>
+                            <th>Total Hours</th>
+                            <th>Total Pay ($)</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+                <button id="export-summary-button" class="hidden secondary">Export CSV</button>
+            </div>
+            <div class="card">
+                <h4>Logs</h4>
+                <table id="logs-table">
+                    <thead>
+                        <tr>
+                            <th>Employee</th>
+                            <th>Date</th>
+                            <th>Punch In</th>
+                            <th>Punch Out</th>
+                            <th>Hours Worked</th>
+                            <th>Pay Period Start</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
